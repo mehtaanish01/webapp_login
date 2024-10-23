@@ -1,0 +1,72 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+public class localweb {
+
+    public static void main(String[] args){
+        //Intialize local chrome driver
+        System.setProperty("webdriver.chrome.driver","C://Users//91838//Documents//chromedriver-win64//chromedriver-win64//chromedriver.exe");
+
+        ChromeOptions options = new ChromeOptions();
+
+        //disabling sandbox
+
+        options.addArguments("--window-size=1920,1080");
+
+        WebDriver driver = new ChromeDriver(options);
+
+        //Writing sample login scenario for Facebook.com
+
+        try {
+            driver.get("https://www.facebook.com/");
+
+            //We can have explicit wait to see whether elements of that page are visible or not before interacting with it
+            WebDriverWait wait = new WebDriverWait(driver, 10);
+
+
+
+            WebElement username = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id=\"email\"]")));
+            username.sendKeys("abcd@gmail.com");
+
+            WebElement password = driver.findElement(By.xpath("//input[@id='pass']"));
+            password.sendKeys("12345!@#$%dfg");
+
+            WebElement login = driver.findElement(By.xpath("//button[@name='login']"));
+            login.click();
+            Thread.sleep(5000);
+            System.out.println("Login Attempted");
+        }
+        catch (Exception error)
+        {
+            error.printStackTrace();
+
+        }
+        //calling driver.quit
+
+            driver.quit();
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
